@@ -1,0 +1,228 @@
+class Program
+{
+    static void Main(string[] item)
+    {
+        Note noute = new Note("", "", 22,14,5,2004);
+        Note[] notes = new Note[3];
+        for (int i = 0; i < notes.Length; i++)
+        {
+            notes[i] = new Note();
+            int result;
+            Console.WriteLine($"Введите имя #{i + 1}");
+            for (int j = 0; j < 100; j++)
+            {
+                string a = Console.ReadLine();
+                if (a == String.Empty)
+                {
+                    Console.WriteLine("Вы не ввели имя \nВведите имя заново");
+                }
+                else if (int.TryParse(a, out result))
+                {
+                        Console.WriteLine("Имя не может быть числом \nВведите имя заново");
+                }
+                else
+                {
+                    notes[i].FirstName = a;
+                    break;
+                }     
+            }
+            Console.WriteLine($"Введите фамилию #{i + 1}");
+            for (int j = 0; j < 100; j++)
+            {
+                string a = Console.ReadLine();
+                if (a == String.Empty)
+                {
+                    Console.WriteLine("Вы не ввели фамилию \nВведите фамилию заново");
+                }
+                else if (int.TryParse(a, out result))
+                {
+                    Console.WriteLine("Фамилия не может быть числом \nВведите фамилию заново");
+                }
+                else
+                {
+                    notes[i].LastName = a;
+                    break;
+                }
+            }
+            Console.WriteLine($"Введите номер телефона #{i + 1}");           
+            for (int j = 0; j < 100; j++)
+            {
+                string a = Console.ReadLine();
+                if (a == String.Empty)
+                {
+                    Console.WriteLine("Вы не задали телефон \nВведите номер телефона заново");
+                }
+                else if (int.TryParse(a, out result))
+                {
+                    notes[i].PhoneNumber = result;
+                    if (notes[i].PhoneNumber < 0)
+                    {
+                        Console.WriteLine("Не правильно номер телефона \nВведите номер телефона заново");
+                    }
+                    else break;
+                }
+                else if (!int.TryParse(a, out result))
+                {
+                    Console.WriteLine("Номер телефона не может состоять из букв\nВведите номер телефона заново");
+                }
+            }
+            Console.WriteLine($"Введите день рождения #{i + 1}");
+            for (int j = 0; j < 100; j++)
+            {
+                string a = Console.ReadLine();
+                if (a == String.Empty)
+                {
+                    Console.WriteLine("Вы не задали день рождения \nВведите день рождения заново");
+                }
+                else if (int.TryParse(a, out result))
+                {
+                    notes[i].Day = result;
+                    if (notes[i].Day > 30 || notes[i].Day < 1)
+                    {
+                        Console.WriteLine("Не правильно введён день рождения \nВведите день рождения заново");
+                    }
+                    else break;
+                }
+                else if (!int.TryParse(a, out result))
+                {
+                    Console.WriteLine("День рождения не может состоять из букв\nВведите номер телефона заново");
+                }
+            }
+            Console.WriteLine($"Введите месяц рождения #{i + 1}");
+            for (int j = 0; j < 100; j++)
+            {
+                string a = Console.ReadLine();
+                if (a == String.Empty)
+                {
+                    Console.WriteLine("Вы не задали месяц рождения \nВведите месяц рождения заново");
+                }
+                else if (int.TryParse(a, out result))
+                {
+                    notes[i].Month = result;
+                    if (notes[i].Month > 12 || notes[i].Month < 1)
+                    {
+                        Console.WriteLine("Не правильно введён месяц рождения \nВведите месяц рождения заново");
+                    }
+                    else break;
+                }
+                else if (!int.TryParse(a, out result))
+                {
+                    Console.WriteLine("Месяц рождения не может состоять из букв\nВведите номер телефона заново");
+                }
+            }
+            Console.WriteLine($"Введите год рождения #{i + 1}");
+            for (int j = 0; j < 100; j++)
+            {
+                string a = Console.ReadLine();
+                if (a == String.Empty)
+                {
+                    Console.WriteLine("Вы не задали год рождения \nВведите год рождения заново");
+                }
+                else if (int.TryParse(a, out result))
+                {
+                    notes[i].Year = result;
+                    if (notes[i].Year > 2022 || notes[i].Year < 1920)
+                    {
+                        Console.WriteLine("Не правильно введён год рождения \nВведите год рождения заново");
+                    }
+                    else break;
+                }
+                else if (!int.TryParse(a, out result))
+                {
+                    Console.WriteLine("Год рождения не может состоять из букв\nВведите номер телефона заново");
+                }
+            }
+        }
+        Console.WriteLine();
+        Console.WriteLine("Записи:");
+        for (int i = 0; i < notes.Length; i++)
+        {
+            for (int j = 0; j < notes.Length; j++)
+            {
+                if (notes[i].Year >= notes[j].Year)
+                {
+                    if (notes[i].Month >= notes[j].Month)
+                    {
+                        if (notes[i].Day >= notes[j].Day)
+                        {
+                            Note b;
+                            b = notes[i];
+                            notes[i] = notes[j];
+                            notes[j] = b;
+                        }
+                    }
+                }
+            }
+        }
+        Console.WriteLine(" Имя       Фамилия       Телефон     Дата рождения");
+        for (int i = 0; i < 3; i++)
+        {
+            Console.WriteLine($"{notes[i].FirstName}       {notes[i].LastName}          {notes[i].PhoneNumber}         {notes[i].Day}.{notes[i].Month}.{notes[i].Year}");
+        }
+        Console.WriteLine();
+        Console.WriteLine("Введите номер телефона, информацию о котором хотите узнать");
+        Console.WriteLine();
+        int d = 0;
+        for (int i = 0; i < 10; i++)
+        {
+            int a = 0;
+            int result;
+            if (int.TryParse(Console.ReadLine(), out result))
+            {
+                a = result;
+            }
+            else if (a == null)
+            {
+                Console.WriteLine("Строка пустая, введите номер телефона ещё раз");
+            }
+            if (d == 1 && a == 1)
+            {
+                break;
+            }
+            else
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (Convert.ToInt32(a) == notes[j].PhoneNumber)
+                    {
+                        Console.WriteLine($"Телефону {notes[j].PhoneNumber} соответствует информация:");
+                        Console.WriteLine($"Имя: {notes[j].FirstName}\nФамилия: {notes[j].LastName}\nНомер телефона: {notes[j].PhoneNumber}\nДата рождения: {notes[j].Day}.{notes[j].Month}.{notes[j].Year}");
+                        break;
+                    }
+                    else if (j == 2)
+                    {
+                        Console.WriteLine("Такого номера не существует");
+                    }
+                }
+            }
+            d = 1;
+            Console.WriteLine();
+            Console.WriteLine("Введите номер следующего телефона или, если хотите прекратить, введите 1");
+        }
+    }
+}
+
+
+
+public class Note
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int PhoneNumber { get; set; }
+        public int Day { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
+        public Note(string firstName, string lastName, int phoneNumber, int day, int month, int year)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
+            Day = day;
+            Month = month;
+            Year = year;
+        }
+        public Note()
+        {
+
+        }
+    }
